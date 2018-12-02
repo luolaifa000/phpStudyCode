@@ -25,7 +25,7 @@ function prend()
  * 
  * 构建大堆序
  * 
- * @author laifaluo
+ * @author yumancang
  *
  */
 class HeapSort {

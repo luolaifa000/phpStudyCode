@@ -1,6 +1,4 @@
 <?php
-
-
 function pre($arr)
 {
     $data = func_get_args();
@@ -23,7 +21,11 @@ function prend()
     }
     exit();
 }
-
+/**
+ * 位图存储数据
+ * @author yumancang
+ *
+ */
 class BitMap
 {
     /**
@@ -43,6 +45,33 @@ class BitMap
         sort($this->data);
         $max = $this->data[count($this->data) - 1];
         $this->bitmap = array_fill(0, ceil($max/64), 0);
+    }
+    
+    /**
+     * 在位图中找出10个最大的数
+     * 
+     */
+    public function findMaxTen()
+    {
+        $k = 0;
+        $array = [];
+        $length = count($this->bitmap) - 1;
+  
+        for ($i = $length;$i>=0;$i--) {
+            if ($k > 9) break;
+            for ($j = 63; $j>=0;$j--) {
+                if ($k > 9) break;
+                $temp = 1 << $j;
+                
+                $flag = $this->bitmap[$i] & $temp;
+                if ($flag) {
+                    $array[$k] = 64*$i + $j;
+                    $k++;
+                }
+                
+            }
+        }
+        prend($array);
     }
     
     /**
@@ -100,7 +129,8 @@ for ($i = 1;$i<$max;$i++) {
 
 $bitmap = new BitMap($ass);
 $bitmap->saveArrayToBitmap();
-$bitmap->saveBitmapToArray();
+//$bitmap->saveBitmapToArray();
+$bitmap->findMaxTen();
 
 
 $end = memory_get_usage();
