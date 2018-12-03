@@ -22,12 +22,12 @@ function prend()
     exit();
 }
 /**
- * 冒泡排序
- * 基本思想是，对相邻的元素进行两两比较，顺序相反则进行交换，这样，每一趟会将最小或最大的元素“浮”到顶端，最终达到完全有序
+ * 选择排序 
+ * 基本思想为每一趟从待排序的数据元素中选择最小（或最大）的一个元素作为首元素，直到所有元素排完为止，简单选择排序是不稳定排序
  * @author yumancang
  *
  */
-class BubbleSort
+class SelectSort
 {
     /**
      * 整数数组
@@ -42,41 +42,53 @@ class BubbleSort
     }
     
     /**
-     * 升序冒泡 
+     * 升序选择 
      * 时间复杂度  n n-1 n-2 n-3 .... 1   (1+n)*n/2 = O(n2)
      */
-    public function ascBubbleSort()
+    public function ascSelectSort()
     {
         pre($this->data);
         $length = count($this->data);
+        
         for ($i = 0; $i< $length-1; $i++) {
-            for ($j = 0; $j < $length-$i-1; $j++) {
-                if ($this->data[$j] > $this->data[$j+1]) {
+            for ($j = $i; $j < $length-1; $j++) {
+                if ($this->data[$j] < $this->data[$j+1]) {
                     $temp = $this->data[$j+1];
                     $this->data[$j+1] = $this->data[$j];
                     $this->data[$j] = $temp;
                 }  
             }
+            
+            $temp = $this->data[$length-1];
+            $this->data[$length-1] = $this->data[$i];
+            $this->data[$i] = $temp;
+            
         }
         pre($this->data);
     }
     
     /**
-     * 降序冒泡
+     * 降序选择 
      * 时间复杂度  n n-1 n-2 n-3 .... 1   (1+n)*n/2 = O(n2)
      */
-    public function descBubbleSort()
+    public function descSelectSort()
     {
         pre($this->data);
         $length = count($this->data);
+        
         for ($i = 0; $i< $length-1; $i++) {
-            for ($j = 0; $j < $length-$i-1; $j++) {
-                if ($this->data[$j] < $this->data[$j+1]) {
+            for ($j = $i; $j < $length-1; $j++) {
+                if ($this->data[$j] > $this->data[$j+1]) {
                     $temp = $this->data[$j+1];
                     $this->data[$j+1] = $this->data[$j];
                     $this->data[$j] = $temp;
                 }
             }
+            
+            $temp = $this->data[$length-1];
+            $this->data[$length-1] = $this->data[$i];
+            $this->data[$i] = $temp;
+            
         }
         pre($this->data);
     }
@@ -87,9 +99,9 @@ class BubbleSort
 
 $start = memory_get_usage();
 
-$bubble = new BubbleSort([7,3,2,4,6,9,5,55,77,33,23,234,66,88,44,234,566]);
-$bubble->ascBubbleSort();
-$bubble->descBubbleSort();
+$select = new SelectSort([7,3,2,4,6,9,5]);
+//$select->ascSelectSort();
+$select->descSelectSort();
 $end = memory_get_usage();
 prend(($end-$start)/1024/1024);
 

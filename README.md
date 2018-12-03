@@ -20,3 +20,11 @@ blog https://blog.csdn.net/luolaifa000/article/details/84770154
 # BubbleSort.php
 冒泡排序
 blog https://blog.csdn.net/luolaifa000/article/details/84780203
+
+# SelectSort.php
+选择排序
+blog https://blog.csdn.net/luolaifa000/article/details/84780203
+
+# InsertSort.php
+插入排序
+blog https://blog.csdn.net/luolaifa000/article/details/84780203
