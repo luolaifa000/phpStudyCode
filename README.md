@@ -23,8 +23,8 @@ blog https://blog.csdn.net/luolaifa000/article/details/84780203
 
 # SelectSort.php
 选择排序
-blog https://blog.csdn.net/luolaifa000/article/details/84780203
+blog https://blog.csdn.net/luolaifa000/article/details/84781381
 
 # InsertSort.php
 插入排序
-blog https://blog.csdn.net/luolaifa000/article/details/84780203
+blog https://blog.csdn.net/luolaifa000/article/details/84781395
