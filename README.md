@@ -12,3 +12,7 @@ blog https://blog.csdn.net/luolaifa000/article/details/84673388
 # BinSearchTree.php
 二叉搜索树-插入，删除，搜索
 blog https://blog.csdn.net/luolaifa000/article/details/84728023
+
+# BlanceTree.php
+二叉搜索树-插入，搜索, 删除操作后续完成
+blog https://blog.csdn.net/luolaifa000/article/details/84770154
