@@ -28,3 +28,7 @@ blog https://blog.csdn.net/luolaifa000/article/details/84781381
 # InsertSort.php
 插入排序
 blog https://blog.csdn.net/luolaifa000/article/details/84781395
+
+# MiddleSearch.php
+二分查找
+blog https://blog.csdn.net/luolaifa000/article/details/84781543
