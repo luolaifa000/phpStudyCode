@@ -373,6 +373,34 @@ class BlanceTree
                 $this->transplantSingleNode($node,$minNode);
             }
         }
+        
+        $lNodeHeight = $node->pNode->lNode ? $rootNode->pNode->lNode->height : 1;
+        $rNodeHeight = $rootNode->pNode->rNode ? $rootNode->pNode->rNode->height : 1;
+        //求节点的高度
+        $node->pNode->height = max($lNodeHeight,$rNodeHeight) + 1;
+        //节点的平衡因子是否大于1
+        #左左情况，右旋
+        if (($lNodeHeight - $rNodeHeight) > 1) {
+            if ($node->pNode->lNode->lNode->height > $node->pNode->lNode->rNode->height) {
+                $this->rightRotate($node->pNode->lNode, $node->pNode);
+            } else {
+                
+                $this->leftAndRightRotate($node->pNode);
+            }
+            
+        }
+        
+        #右右情况，左旋
+        if (($lNodeHeight - $rNodeHeight) < -1) {
+            
+            if ($node->pNode->rNode->lNode->height > $node->pNode->rNode->rNode->height) {
+                
+                $this->rightAndLeftRotate($node->pNode);
+            } else {
+                $this->leftRotate($node->pNode->rNode, $node->pNode);
+            }
+            
+        }
     }
     /**
      * 移动节点不需要附带自己的左右
@@ -404,6 +432,7 @@ class BlanceTree
             $des->rNode = $source->rNode;
             $des->lNode = $source->lNode;
         }
+        $des->height = $source->height;
         return true;
     }
     
@@ -457,53 +486,27 @@ class BlanceTree
         //原节点是其父节点的左子树
         if ($source === $source->pNode->lNode) {
             $source->pNode->lNode = $des;
-            if (!$source->pNode->rNode) {
-                $source->pNode->height--;
-            } else {
-                
-            }
             
         }
         //原节点是其父节点的右子树
         if ($source === $source->pNode->rNode) {
             $source->pNode->rNode = $des;
-            if (!$source->pNode->rNode) {
-                $source->pNode->height--;
-            }
         }
         $des != null && $des->pNode = $source->pNode;
+        
+        while ($source->pNode) {
+            $source->pNode->height--;
+            $source->pNode = $source->pNode->pNode;
+        }
+
         return true;
     }
     
-    /**
-     * 移动节点 需要附带自己的左右
-     *
-     * @param TreeNode $source
-     * @param TreeNode $des
-     * @return boolean
-     */
-    public function transplantNodeTwo(TreeNode $source = null, TreeNode $des = null)
+    public function getNodeBlanceNum(TreeNode $node)
     {
-        if ($source == null) {
-            return false;
-        }
-        
-        //原节点是其父节点的左子树
-        if ($source === $source->pNode->lNode) {
-            $source->pNode->lNode = $des;
-            $des != null && $des->rNode = $source->rNode;
-            $source->rNode->pNode = $des;
-            $source->pNode->height--;
-        }
-        //原节点是其父节点的右子树
-        if ($source === $source->pNode->rNode) {
-            $source->pNode->rNode = $des;
-            $des != null && $des->rNode = $source->rNode;
-            $source->rNode->pNode = $des;
-            $source->pNode->height--;
-        }
-        $des != null && $des->pNode = $source->pNode;
-        return true;
+        $lNodeHeight = $node->lNode ? $node->lNode->height : 0;
+        $rNodeHeight = $node->rNode ? $node->rNode->height : 0;
+        return max($lNodeHeight,$rNodeHeight) + 1;
     }
     
     /**
